@@ -17,13 +17,13 @@ public class Manager implements ISinhVienTest {
     }
 
     @Override
-    public boolean timKiemSinhVien( int id ) {
+    public SinhVien timKiemSinhVien( int id ) {
         for (SinhVien s : arrayList) {
             if (s.getMaSV() == id) {
-                return  true;
+                return  s;
             }
         }
-        return  false;
+        return  null;
     }
 
     @Override
@@ -43,9 +43,9 @@ public class Manager implements ISinhVienTest {
     }
 
     @Override
-    public boolean isIn(SinhVien sv) {
+    public boolean isIn(int id) {
         for (SinhVien s : arrayList){
-            if (s.getMaSV() == sv.getMaSV()) {
+            if (s.getMaSV() == id) {
                 return true;
             }
         }
@@ -66,14 +66,15 @@ public class Manager implements ISinhVienTest {
 
     @Override
     public void suaSinhvien(int id) {
-        if (timKiemSinhVien(id)){
-            System.out.println("MÃ SINH VIÊN KHÔNG HỢP LỆ!");
-        }else {
-            for (SinhVien s : arrayList) {
-                if (id == s.getMaSV()){
+        if (this.isIn(id)) {
+            for (SinhVien s :arrayList) {
+                if (s.getMaSV() == id) {
                     s.inputSinhVien();
+                    System.out.println("ĐÃ SỬA XONG");
                 }
             }
+        }else {
+            System.out.println("KHÔNG CÓ HỌC SINH CÓ MÃ ID: " + id);
         }
 
     }
